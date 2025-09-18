@@ -15,7 +15,7 @@ while(chances>0 and "_"in Word):
             if(b[i]==c):
                 list[i]=c
                 Word=" ".join(list)
-                print('Word:',Word)        
+                       
     else:
         chances=chances-1  
         print("Wrong guess! Chances left:",chances)
