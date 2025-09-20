@@ -9,12 +9,16 @@ Word=" ".join(list)
 while(chances>0 and "_"in Word):
     print("Word:",Word)
     c=input("enter the letter").lower()
+    if(len(c)>1):
+        print("Error!! Enter one letter at a time")
+        c=input("enter the letter")
     if(c in b):
         print("Correct!")
         for i in range(len(b)):
             if(b[i]==c):
                 list[i]=c
                 Word=" ".join(list)
+                print(Word)
                        
     else:
         chances=chances-1  
