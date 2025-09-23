@@ -1,3 +1,21 @@
+ HEAD
+# ecommerce1
+
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
+
 # Probation Projects'25
 
 Jai hind and welcome to Team Conatus Probation Projects for 2025!👋✨
@@ -38,3 +56,4 @@ The reviewers will be notified of the pull request and after reviewing will merg
 
 Best of luck for all the tasks ahead!👍✌️
 
+bdfdddda7ec70b5e188d9c4db5d8e27746a39ff5

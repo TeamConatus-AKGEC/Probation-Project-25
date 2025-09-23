@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "441696103483",
+    "project_id": "bytebasketecommerceapp",
+    "storage_bucket": "bytebasketecommerceapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441696103483:android:124083ea28f47e51f5001e",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1pGy9eFXmZGlRy0LoCW8sufbz1EAnFkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
