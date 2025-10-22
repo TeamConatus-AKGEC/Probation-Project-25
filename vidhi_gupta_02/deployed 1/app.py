@@ -1,11 +1,15 @@
 from flask import Flask, render_template, request
 import pandas as pd
 from joblib import load
+import os
 
 app = Flask(__name__)
 
-model = load(r"C:\Users\ASUS\OneDrive\Desktop\Probation-Project-25\vidhi_gupta_02\deployed 1\best_model.joblib")
-df = pd.read_csv(r"C:\Users\ASUS\OneDrive\Desktop\Probation-Project-25\vidhi_gupta_02\deployed 1\fuel consumption.csv")
+model_path = os.path.join(os.path.dirname(__file__), "best_model.joblib")
+model = load(model_path)
+base_dir = os.path.dirname(__file__)
+csv_path = os.path.join(base_dir, "fuel consumption.csv")
+df = pd.read_csv(csv_path)
 
 categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
 numeric_cols = df.select_dtypes(exclude=['object']).drop(columns=['COEMISSIONS']).columns.tolist()
