@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Income Prediction</title>
+    <style>
+        body { font-family: Arial; background: #f4f6f8; padding: 30px; }
+        .container { background: white; padding: 25px; border-radius: 10px; width: 420px; margin: auto; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        input, select, button { width: 100%; margin-top: 10px; padding: 8px; border-radius: 5px; border: 1px solid #ccc; }
+        button { background: #007BFF; color: white; border: none; cursor: pointer; font-weight: bold; }
+        button:hover { background: #0056b3; }
+        .result { margin-top: 15px; text-align: center; font-weight: bold; color: #2e7d32; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align:center;">Income Prediction</h2>
+        <form action="/predict" method="post">
+            {% for col, options in unique_values.items() %}
+                <label><b>{{ col }}</b></label>
+                <select name="{{ col }}" required>
+                    {% for opt in options %}
+                        <option value="{{ opt }}">{{ opt }}</option>
+                    {% endfor %}
+                </select>
+            {% endfor %}
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">{{ prediction_text }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
