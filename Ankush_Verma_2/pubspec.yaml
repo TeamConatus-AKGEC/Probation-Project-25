@@ -1,0 +1,60 @@
+name: try3
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.9.2
+
+
+dependencies:
+  # flutter_native_splash: ^2.3.5
+  animate_do: ^3.3.4
+  confetti: ^0.7.0
+  google_fonts: ^6.2.1
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.8
+  firebase_core: ^4.1.1
+  firebase_auth: ^6.1.0
+  device_preview: ^1.3.1
+  cloud_firestore: ^6.0.2
+
+dev_dependencies:
+  flutter_native_splash: ^2.4.0 # Add this line
+  flutter_launcher_icons: "^0.13.1" # Add this line
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^5.0.0
+
+
+
+# The following section is specific to Flutter packages.
+flutter:
+  assets:
+    - assets/todoSplash.jpg
+
+  uses-material-design: true
+
+# This section MUST be at the root level (no indentation)
+flutter_native_splash:
+  color: "#a000c8"
+  #image: assets/todoSplash.jpg
+  android: true
+  ios: true
+  #web: false
+
+# Add this section at the end of your pubspec.yaml
+flutter_launcher_icons:
+  android: "launcher_icon" # The name of the icon file for Android (without extension)
+  ios: true # Set to true to generate icons for iOS
+  image_path: "assets/icon/avatar.png" # The path to your source icon
+  min_sdk_android: 21 # optional
