@@ -1,0 +1,15 @@
+# Ignore Python virtualenvs anywhere
+venv/
+**/venv/
+.venv/
+**/.venv/
+
+# other common env names
+env/
+.env/
+ENV/
+envs/
+venv*/
+venv-*/
+.pyenv/
+pyvenv.cfg

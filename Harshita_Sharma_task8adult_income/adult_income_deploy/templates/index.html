@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adult Income Prediction</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f8f9fa; padding: 20px; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 10px; box-shadow: 0px 0px 8px rgba(0,0,0,0.1); }
+        h2 { text-align: center; }
+        label { display: block; margin-top: 10px; }
+        select, input { width: 100%; padding: 8px; margin-top: 4px; }
+        button { width: 100%; margin-top: 15px; padding: 10px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .output { text-align: center; margin-top: 20px; font-size: 18px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Adult Income Predictor</h2>
+        <form action="/predict" method="post">
+            <label>Age:</label>
+            <input type="number" name="age" required>
+
+            <label>Education (numeric):</label>
+            <input type="number" name="education_num" required>
+
+            <label>Hours per Week:</label>
+            <input type="number" name="hours" required>
+
+            <label>Workclass:</label>
+            <select name="workclass">
+                <option value="Private">Private</option>
+                <option value="Self-emp-not-inc">Self-emp-not-inc</option>
+                <option value="Self-emp-inc">Self-emp-inc</option>
+                <option value="State-gov">State-gov</option>
+                <option value="Federal-gov">Federal-gov</option>
+                <option value="Local-gov">Local-gov</option>
+                <option value="Without-pay">Without-pay</option>
+                <option value="Never-worked">Never-worked</option>
+            </select>
+
+            <label>Marital Status:</label>
+            <select name="marital.status">
+                <option value="Never-married">Never-married</option>
+                <option value="Married-civ-spouse">Married-civ-spouse</option>
+                <option value="Separated">Separated</option>
+                <option value="Widowed">Widowed</option>
+                <option value="Married-AF-spouse">Married-AF-spouse</option>
+                <option value="Married-spouse-absent">Married-spouse-absent</option>
+            </select>
+
+            <label>Occupation:</label>
+            <select name="occupation">
+                <option value="Tech-support">Tech-support</option>
+                <option value="Craft-repair">Craft-repair</option>
+                <option value="Other-service">Other-service</option>
+                <option value="Sales">Sales</option>
+                <option value="Exec-managerial">Exec-managerial</option>
+                <option value="Prof-specialty">Prof-specialty</option>
+                <option value="Handlers-cleaners">Handlers-cleaners</option>
+                <option value="Machine-op-inspct">Machine-op-inspct</option>
+                <option value="Adm-clerical">Adm-clerical</option>
+                <option value="Farming-fishing">Farming-fishing</option>
+                <option value="Transport-moving">Transport-moving</option>
+                <option value="Priv-house-serv">Priv-house-serv</option>
+                <option value="Protective-serv">Protective-serv</option>
+                <option value="Armed-Forces">Armed-Forces</option>
+            </select>
+
+            <label>Relationship:</label>
+            <select name="relationship">
+                <option value="Wife">Wife</option>
+                <option value="Own-child">Own-child</option>
+                <option value="Husband">Husband</option>
+                <option value="Not-in-family">Not-in-family</option>
+                <option value="Other-relative">Other-relative</option>
+                <option value="Unmarried">Unmarried</option>
+            </select>
+
+            <label>Race:</label>
+            <select name="race">
+                <option value="White">White</option>
+                <option value="Black">Black</option>
+                <option value="Asian-Pac-Islander">Asian-Pac-Islander</option>
+                <option value="Amer-Indian-Eskimo">Amer-Indian-Eskimo</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label>Sex:</label>
+            <select name="sex">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <button type="submit">Predict Income</button>
+        </form>
+
+        <div class="output">{{ prediction_text }}</div>
+    </div>
+</body>
+</html>

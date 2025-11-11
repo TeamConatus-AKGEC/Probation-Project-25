@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vehicle CO2 Emission Predictor</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+    .container { max-width: 960px; margin: 32px auto; background: #fff; border-radius: 16px;
+                 box-shadow: 0 18px 50px rgba(0,0,0,.25); overflow: hidden; }
+    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:#fff; padding: 32px; text-align:center; }
+    .header h1 { font-size: 28px; font-weight: 800; }
+    .content { padding: 28px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+    label { font-size: 13px; font-weight: 700; color:#333; margin-bottom: 6px; display:block; }
+    input, select { width: 100%; padding: 12px; border: 2px solid #e5e7eb; border-radius: 10px; background:#f9fafb;
+                    transition: .2s border-color, .2s box-shadow; }
+    input:focus, select:focus { outline: none; border-color:#667eea; box-shadow: 0 0 0 3px rgba(102,126,234,.12); background:#fff; }
+    .btn { margin-top: 12px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color:#fff; padding: 14px 20px;
+           border: 0; border-radius: 12px; font-weight: 800; cursor: pointer; width: 100%;
+           box-shadow: 0 10px 25px rgba(102,126,234,.45); }
+    .btn:hover { transform: translateY(-2px); }
+    .alert { padding: 14px; border-radius: 10px; margin-bottom: 18px; color: #fff; }
+    .alert.error { background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); }
+    .alert.ok { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+    .prediction { text-align:center; padding: 6px 0; }
+    .prediction .value { font-size: 32px; font-weight: 900; }
+    .section { font-size: 14px; font-weight: 800; color:#374151; margin: 18px 0 8px; }
+    @media (max-width: 520px){ .header h1 { font-size: 22px; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Vehicle CO2 Emission Predictor</h1>
+      <p>Enter specifications to estimate emissions (g/km)</p>
+    </div>
+
+    <div class="content">
+      {% if error %}
+        <div class="alert error"><strong>Error:</strong> {{ error }}</div>
+      {% endif %}
+
+      {% if prediction is not none %}
+        <div class="alert ok">
+          <div class="prediction">
+            <div>Predicted CO₂ Emissions</div>
+            <div class="value">{{ prediction }} g/km</div>
+          </div>
+        </div>
+      {% endif %}
+
+      <form method="POST" action="/predict">
+        <div class="section">Vehicle</div>
+        <div class="grid">
+          <div>
+            <label for="MAKE">Make</label>
+            <select id="MAKE" name="MAKE" required>
+              <option value="" disabled {% if not input_data %}selected{% endif %}>Select</option>
+              {% for opt in categories['MAKE'] %}
+                <option value="{{ opt }}" {% if input_data and input_data.get('MAKE') == opt %}selected{% endif %}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div>
+            <label for="MODEL">Model</label>
+            <select id="MODEL" name="MODEL" required>
+              <option value="" disabled {% if not input_data %}selected{% endif %}>Select</option>
+              {% for opt in categories['MODEL'] %}
+                <option value="{{ opt }}" {% if input_data and input_data.get('MODEL') == opt %}selected{% endif %}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div>
+            <label for="VEHICLE CLASS">Vehicle Class</label>
+            <select id="VEHICLE CLASS" name="VEHICLE CLASS" required>
+              <option value="" disabled {% if not input_data %}selected{% endif %}>Select</option>
+              {% for opt in categories['VEHICLE CLASS'] %}
+                <option value="{{ opt }}" {% if input_data and input_data.get('VEHICLE CLASS') == opt %}selected{% endif %}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div>
+            <label for="TRANSMISSION">Transmission</label>
+            <select id="TRANSMISSION" name="TRANSMISSION" required>
+              <option value="" disabled {% if not input_data %}selected{% endif %}>Select</option>
+              {% for opt in categories['TRANSMISSION'] %}
+                <option value="{{ opt }}" {% if input_data and input_data.get('TRANSMISSION') == opt %}selected{% endif %}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div>
+            <label for="FUEL">Fuel Type</label>
+            <select id="FUEL" name="FUEL" required>
+              <option value="" disabled {% if not input_data %}selected{% endif %}>Select</option>
+              {% for opt in categories['FUEL'] %}
+                <option value="{{ opt }}" {% if input_data and input_data.get('FUEL') == opt %}selected{% endif %}>{{ opt }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="section">Technical</div>
+        <div class="grid">
+          <div>
+            <label for="ENGINE SIZE">Engine Size (L)</label>
+            <input type="number" step="0.1" id="ENGINE SIZE" name="ENGINE SIZE"
+                   value="{{ input_data.get('ENGINE SIZE') if input_data else '' }}" required />
+          </div>
+
+          <div>
+            <label for="CYLINDERS">Cylinders</label>
+            <input type="number" step="1" id="CYLINDERS" name="CYLINDERS"
+                   value="{{ input_data.get('CYLINDERS') if input_data else '' }}" required />
+          </div>
+
+          <div>
+            <label for="FUEL CONSUMPTION">Fuel Consumption (L/100km)</label>
+            <input type="number" step="0.1" id="FUEL CONSUMPTION" name="FUEL CONSUMPTION"
+                   value="{{ input_data.get('FUEL CONSUMPTION') if input_data else '' }}" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Predict Emissions</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
