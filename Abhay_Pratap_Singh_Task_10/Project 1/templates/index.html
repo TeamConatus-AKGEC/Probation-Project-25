@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Income Predictor </title>
+    <style>
+        @import url('https://db.onlinewebfonts.com/c/f41eeef7f001b066c10e8597ddf6eca2?family=Effra+W20+Medium');
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Effra W20 Medium';
+        }
+
+        body {
+            font-family: 'Effra W20 Medium';
+            background-color: #fdfdfd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            background-color: #28a745;
+            padding: 8px 50px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            margin-right: 20px;
+        }
+
+        nav h2 {
+            color: white;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .link {
+            margin-left: auto;
+        }
+
+        main {
+            background: #fdfdfd;
+            padding: 20px;
+            border-radius: 5px;
+            width: auto;
+            padding: 2.5%;
+            border-radius: 20px;
+            border: 1px solid #28a745;
+        }
+
+        form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            column-gap: 20px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #28a745;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 0 0 0 20px;
+            height: 40px;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+            appearance: none;
+        }
+
+        button {
+            grid-column: 2;
+            padding: 9px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <h2>ML Model</h2>
+        <div class="link">
+            <a href="#"> Home </a>
+            <a href="#"> About </a>
+            <a href="#"> Contact </a>
+        </div>
+    </nav>
+
+    <main>
+        <h1>COEmission Predictor</h1>
+
+        <form action="/submit" method="POST">
+
+            <label for="make">MAKE</label>
+            <select name="make" id="make">
+                <option value="ACURA">ACURA</option>
+                <option value="AUDI">AUDI</option>
+                <option value="BMW">BMW</option>
+                <option value="BUICK">BUICK</option>
+                <option value="CADILLAC">CADILLAC</option>
+                <option value="CHEVROLET">CHEVROLET</option>
+                <option value="CHRYSLER">CHRYSLER</option>
+                <option value="DAEWOO">DAEWOO</option>
+                <option value="DODGE">DODGE</option>
+                <option value="FERRARI">FERRARI</option>
+                <option value="FORD">FORD</option>
+                <option value="GMC">GMC</option>
+                <option value="HONDA">HONDA</option>
+                <option value="HYUNDAI">HYUNDAI</option>
+                <option value="INFINITI">INFINITI</option>
+                <option value="ISUZU">ISUZU</option>
+                <option value="JAGUAR">JAGUAR</option>
+                <option value="JEEP">JEEP</option>
+                <option value="KIA">KIA</option>
+                <option value="LAND ROVER">LAND ROVER</option>
+                <option value="LEXUS">LEXUS</option>
+                <option value="LINCOLN">LINCOLN</option>
+                <option value="MAZDA">MAZDA</option>
+                <option value="MERCEDES-BENZ">MERCEDES-BENZ</option>
+                <option value="NISSAN">NISSAN</option>
+                <option value="OLDSMOBILE">OLDSMOBILE</option>
+                <option value="PLYMOUTH">PLYMOUTH</option>
+                <option value="PONTIAC">PONTIAC</option>
+                <option value="PORSCHE">PORSCHE</option>
+                <option value="SAAB">SAAB</option>
+                <option value="SATURN">SATURN</option>
+                <option value="SUBARU">SUBARU</option>
+                <option value="SUZUKI">SUZUKI</option>
+                <option value="TOYOTA">TOYOTA</option>
+                <option value="VOLKSWAGEN">VOLKSWAGEN</option>
+                <option value="VOLVO">VOLVO</option>
+            </select>
+
+            <label for="model">MODEL</label>
+            <select name="model" id="model">
+                <option value="1.6EL">1.6EL</option>
+                <option value="3.2TL">3.2TL</option>
+                <option value="3.5RL">3.5RL</option>
+                <option value="INTEGRA">INTEGRA</option>
+                <option value="INTEGRA GSR/TYPE R">INTEGRA GSR/TYPE R</option>
+                <option value="NSX">NSX</option>
+                <option value="A4">A4</option>
+                <option value="A4 QUATTRO">A4 QUATTRO</option>
+                <option value="A6">A6</option>
+                <option value="A6 AVANT QUATTRO">A6 AVANT QUATTRO</option>
+                <option value="A6 QUATTRO">A6 QUATTRO</option>
+                <option value="A8 QUATTRO">A8 QUATTRO</option>
+                <option value="S4 QUATTRO">S4 QUATTRO</option>
+                <option value="TT COUPE QUATTRO">TT COUPE QUATTRO</option>
+                <option value="TT COUPE QUATTRO (SUPERCHARGED)">TT COUPE QUATTRO (SUPERCHARGED)</option>
+                <option value="TT ROADSTER">TT ROADSTER</option>
+                <option value="TT ROADSTER QUATTRO (SUPERCHARGED)">TT ROADSTER QUATTRO (SUPERCHARGED)</option>
+                <option value="323 CONVERTIBLE">323 CONVERTIBLE</option>
+                <option value="323Ci">323Ci</option>
+                <option value="323i">323i</option>
+                <option value="328Ci">328Ci</option>
+                <option value="328i">328i</option>
+                <option value="528i">528i</option>
+                <option value="528i TOURING">528i TOURING</option>
+                <option value="540i">540i</option>
+                <option value="540i TOURING">540i TOURING</option>
+                <option value="740i">740i</option>
+                <option value="740iL">740iL</option>
+                <option value="750iL">750iL</option>
+                <option value="M COUPE">M COUPE</option>
+                <option value="M ROADSTER">M ROADSTER</option>
+                <option value="M5">M5</option>
+                <option value="X5">X5</option>
+                <option value="Z3">Z3</option>
+                <option value="Z8">Z8</option>
+                <option value="CENTURY">CENTURY</option>
+                <option value="LESABRE">LESABRE</option>
+                <option value="PARK AVENUE">PARK AVENUE</option>
+                <option value="PARK AVENUE #">PARK AVENUE #</option>
+                <option value="REGAL">REGAL</option>
+                <option value="REGAL #">REGAL #</option>
+                <option value="CATERA">CATERA</option>
+                <option value="DEVILLE">DEVILLE</option>
+                <option value="ELDORADO">ELDORADO</option>
+                <option value="ESCALADE 4X4">ESCALADE 4X4</option>
+                <option value="SEVILLE">SEVILLE</option>
+                <option value="ASTRO AWD CARGO">ASTRO AWD CARGO</option>
+                <option value="ASTRO AWD PASSENGER">ASTRO AWD PASSENGER</option>
+                <option value="ASTRO CARGO">ASTRO CARGO</option>
+                <option value="ASTRO PASSENGER">ASTRO PASSENGER</option>
+                <option value="BLAZER">BLAZER</option>
+                <option value="BLAZER 4X4">BLAZER 4X4</option>
+                <option value="C1500 SILVERADO">C1500 SILVERADO</option>
+                <option value="C2500 SILVERADO">C2500 SILVERADO</option>
+                <option value="CAMARO">CAMARO</option>
+                <option value="CAVALIER">CAVALIER</option>
+                <option value="CAVALIER BIFUEL">CAVALIER BIFUEL</option>
+                <option value="CORVETTE">CORVETTE</option>
+                <option value="G15/G25 CHEVY VAN">G15/G25 CHEVY VAN</option>
+                <option value="G1500/G2500 CHEVY EXPRESS">G1500/G2500 CHEVY EXPRESS</option>
+                <option value="IMPALA">IMPALA</option>
+                <option value="K1500 SILVERADO 4X4">K1500 SILVERADO 4X4</option>
+                <option value="K1500 TAHOE 4X4">K1500 TAHOE 4X4</option>
+                <option value="LUMINA/MONTE CARLO">LUMINA/MONTE CARLO</option>
+                <option value="MALIBU">MALIBU</option>
+                <option value="METRO">METRO</option>
+                <option value="NEW C1500 SUBURBAN">NEW C1500 SUBURBAN</option>
+                <option value="NEW C1500 TAHOE">NEW C1500 TAHOE</option>
+                <option value="NEW K1500 TAHOE 4X4">NEW K1500 TAHOE 4X4</option>
+                <option value="S10">S10</option>
+                <option value="S10 4X4">S10 4X4</option>
+                <option value="TRACKER 4X4">TRACKER 4X4</option>
+                <option value="TRACKER CONVERTIBLE 4X4">TRACKER CONVERTIBLE 4X4</option>
+                <option value="VENTURE">VENTURE</option>
+                <option value="300M">300M</option>
+                <option value="CIRRUS">CIRRUS</option>
+                <option value="CONCORDE">CONCORDE</option>
+                <option value="INTREPID">INTREPID</option>
+                <option value="LHS">LHS</option>
+                <option value="NEON">NEON</option>
+                <option value="PT CRUISER">PT CRUISER</option>
+                <option value="SEBRING">SEBRING</option>
+                <option value="SEBRING CONVERTIBLE">SEBRING CONVERTIBLE</option>
+                <option value="TOWN &amp; COUNTRY">TOWN &amp; COUNTRY</option>
+                <option value="TOWN &amp; COUNTRY AWD">TOWN &amp; COUNTRY AWD</option>
+                <option value="LANOS">LANOS</option>
+                <option value="LEGANZA">LEGANZA</option>
+                <option value="NUBIRA">NUBIRA</option>
+                <option value="NUBIRA WAGON">NUBIRA WAGON</option>
+                <option value="CARAVAN">CARAVAN</option>
+                <option value="CARAVAN FFV">CARAVAN FFV</option>
+                <option value="DAKOTA">DAKOTA</option>
+                <option value="DAKOTA 4X4">DAKOTA 4X4</option>
+                <option value="DURANGO 4X4">DURANGO 4X4</option>
+                <option value="DURANGO 5.9 R/T 4X4">DURANGO 5.9 R/T 4X4</option>
+                <option value="GRAND CARAVAN">GRAND CARAVAN</option>
+                <option value="GRAND CARAVAN AWD">GRAND CARAVAN AWD</option>
+                <option value="GRAND CARAVAN FFV">GRAND CARAVAN FFV</option>
+                <option value="RAM 1500">RAM 1500</option>
+                <option value="RAM 1500 4X4">RAM 1500 4X4</option>
+                <option value="RAM 1500 VAN">RAM 1500 VAN</option>
+                <option value="RAM 1500 WAGON">RAM 1500 WAGON</option>
+                <option value="RAM 2500 VAN">RAM 2500 VAN</option>
+                <option value="RAM 2500 VAN NGV">RAM 2500 VAN NGV</option>
+                <option value="RAM 2500 WAGON">RAM 2500 WAGON</option>
+                <option value="VIPER GTS">VIPER GTS</option>
+                <option value="VIPER RT/10">VIPER RT/10</option>
+                <option value="360 MODENA F1">360 MODENA F1</option>
+                <option value="456 MGT">456 MGT</option>
+                <option value="456 MGTA">456 MGTA</option>
+                <option value="550 MARANELLO">550 MARANELLO</option>
+                <option value="COUGAR">COUGAR</option>
+                <option value="CROWN VICTORIA">CROWN VICTORIA</option>
+                <option value="E150 CLUB WAGON">E150 CLUB WAGON</option>
+                <option value="E150 VAN">E150 VAN</option>
+                <option value="E250 VAN">E250 VAN</option>
+                <option value="ESCORT ZX2">ESCORT ZX2</option>
+                <option value="EXPEDITION">EXPEDITION</option>
+                <option value="EXPEDITION 4X4">EXPEDITION 4X4</option>
+                <option value="EXPLORER">EXPLORER</option>
+                <option value="EXPLORER 4X4">EXPLORER 4X4</option>
+                <option value="EXPLORER OHV">EXPLORER OHV</option>
+                <option value="EXPLORER OHV 4X4">EXPLORER OHV 4X4</option>
+                <option value="EXPLORER SOHC">EXPLORER SOHC</option>
+                <option value="EXPLORER SOHC 4X4">EXPLORER SOHC 4X4</option>
+                <option value="F150">F150</option>
+                <option value="F150 4X4">F150 4X4</option>
+                <option value="FOCUS SEDAN">FOCUS SEDAN</option>
+                <option value="FOCUS WAGON">FOCUS WAGON</option>
+                <option value="GRAND MARQUIS">GRAND MARQUIS</option>
+                <option value="MUSTANG">MUSTANG</option>
+                <option value="MUSTANG #">MUSTANG #</option>
+                <option value="RANGER">RANGER</option>
+                <option value="RANGER 4X4">RANGER 4X4</option>
+                <option value="TAURUS">TAURUS</option>
+                <option value="TAURUS #">TAURUS #</option>
+                <option value="TAURUS WAGON">TAURUS WAGON</option>
+                <option value="TAURUS WAGON #">TAURUS WAGON #</option>
+                <option value="WINDSTAR VAN">WINDSTAR VAN</option>
+                <option value="WINDSTAR WAGON">WINDSTAR WAGON</option>
+                <option value="C1500 SIERRA">C1500 SIERRA</option>
+                <option value="C1500 YUKON">C1500 YUKON</option>
+                <option value="C1500 YUKON XL">C1500 YUKON XL</option>
+                <option value="C2500 SIERRA">C2500 SIERRA</option>
+                <option value="G15/G25 SAVANA CARGO">G15/G25 SAVANA CARGO</option>
+                <option value="G1500/G2500 SAVANA PASSENGER">G1500/G2500 SAVANA PASSENGER</option>
+                <option value="JIMMY">JIMMY</option>
+                <option value="JIMMY 4X4">JIMMY 4X4</option>
+                <option value="K1500 SIERRA 4X4">K1500 SIERRA 4X4</option>
+                <option value="K1500 YUKON 4X4">K1500 YUKON 4X4</option>
+                <option value="SAFARI CARGO">SAFARI CARGO</option>
+                <option value="SAFARI CARGO AWD">SAFARI CARGO AWD</option>
+                <option value="SAFARI PASSENGER">SAFARI PASSENGER</option>
+                <option value="SAFARI PASSENGER AWD">SAFARI PASSENGER AWD</option>
+                <option value="SONOMA">SONOMA</option>
+                <option value="SONOMA 4X4">SONOMA 4X4</option>
+                <option value="ACCORD">ACCORD</option>
+                <option value="ACCORD DX">ACCORD DX</option>
+                <option value="ACCORD EX/LX">ACCORD EX/LX</option>
+                <option value="CIVIC COUPE Si">CIVIC COUPE Si</option>
+                <option value="CIVIC COUPE SiR">CIVIC COUPE SiR</option>
+                <option value="CIVIC CX/DX/LX/EX">CIVIC CX/DX/LX/EX</option>
+                <option value="CR-V">CR-V</option>
+                <option value="INSIGHT">INSIGHT</option>
+                <option value="ODYSSEY">ODYSSEY</option>
+                <option value="PRELUDE">PRELUDE</option>
+                <option value="S2000">S2000</option>
+                <option value="ACCENT">ACCENT</option>
+                <option value="ELANTRA">ELANTRA</option>
+                <option value="ELANTRA WAGON">ELANTRA WAGON</option>
+                <option value="SONATA 2.4L">SONATA 2.4L</option>
+                <option value="SONATA 2.5L">SONATA 2.5L</option>
+                <option value="TIBURON">TIBURON</option>
+                <option value="G20">G20</option>
+                <option value="I30">I30</option>
+                <option value="QX4 4X4">QX4 4X4</option>
+                <option value="HOMBRE">HOMBRE</option>
+                <option value="HOMBRE 4X4">HOMBRE 4X4</option>
+                <option value="RODEO 4X4">RODEO 4X4</option>
+                <option value="TROOPER 4X4">TROOPER 4X4</option>
+                <option value="S-TYPE V6">S-TYPE V6</option>
+                <option value="S-TYPE V8">S-TYPE V8</option>
+                <option value="VANDEN PLAS">VANDEN PLAS</option>
+                <option value="VANDEN PLAS SUPERCHARGED">VANDEN PLAS SUPERCHARGED</option>
+                <option value="XJ8">XJ8</option>
+                <option value="XJR #">XJR #</option>
+                <option value="XK8">XK8</option>
+                <option value="XK8 CONVERTIBLE">XK8 CONVERTIBLE</option>
+                <option value="XKR #">XKR #</option>
+                <option value="XKR CONVERTIBLE #">XKR CONVERTIBLE #</option>
+                <option value="CHEROKEE 4X4">CHEROKEE 4X4</option>
+                <option value="GRAND CHEROKEE 4X4">GRAND CHEROKEE 4X4</option>
+                <option value="TJ 4X4">TJ 4X4</option>
+                <option value="SEPHIA">SEPHIA</option>
+                <option value="SPORTAGE 4X4">SPORTAGE 4X4</option>
+                <option value="DISCOVERY SERIES II 4X4">DISCOVERY SERIES II 4X4</option>
+                <option value="RANGE ROVER 4X4">RANGE ROVER 4X4</option>
+                <option value="ES 300">ES 300</option>
+                <option value="GS 300">GS 300</option>
+                <option value="GS 400">GS 400</option>
+                <option value="LS 400">LS 400</option>
+                <option value="LX 470">LX 470</option>
+                <option value="RX 300">RX 300</option>
+                <option value="RX 300 4X4">RX 300 4X4</option>
+                <option value="CONTINENTAL">CONTINENTAL</option>
+                <option value="LS">LS</option>
+                <option value="NAVIGATOR 4X4">NAVIGATOR 4X4</option>
+                <option value="TOWN CAR">TOWN CAR</option>
+                <option value="626">626</option>
+                <option value="B3000">B3000</option>
+                <option value="B4000">B4000</option>
+                <option value="B4000 4X4">B4000 4X4</option>
+                <option value="MILLENIA">MILLENIA</option>
+                <option value="MILLENIA #">MILLENIA #</option>
+                <option value="MPV">MPV</option>
+                <option value="MX-5 MIATA">MX-5 MIATA</option>
+                <option value="PROTEGE">PROTEGE</option>
+                <option value="C 230 KOMPRESSOR #">C 230 KOMPRESSOR #</option>
+                <option value="C 280">C 280</option>
+                <option value="C 43 AMG">C 43 AMG</option>
+                <option value="CLK 320">CLK 320</option>
+                <option value="CLK 320 CABRIOLET">CLK 320 CABRIOLET</option>
+                <option value="CLK 430">CLK 430</option>
+                <option value="CLK 430 CABRIOLET">CLK 430 CABRIOLET</option>
+                <option value="E 320">E 320</option>
+                <option value="E 320 4MATIC">E 320 4MATIC</option>
+                <option value="E 320 4MATIC WAGON">E 320 4MATIC WAGON</option>
+                <option value="E 320 WAGON">E 320 WAGON</option>
+                <option value="E 430">E 430</option>
+                <option value="E 430 4MATIC">E 430 4MATIC</option>
+                <option value="E 55 AMG">E 55 AMG</option>
+                <option value="ML 320">ML 320</option>
+                <option value="ML 430">ML 430</option>
+                <option value="S 430">S 430</option>
+                <option value="S 500">S 500</option>
+                <option value="SL 500">SL 500</option>
+                <option value="SL 600">SL 600</option>
+                <option value="SLK 230 KOMPRESSOR #">SLK 230 KOMPRESSOR #</option>
+                <option value="ALTIMA">ALTIMA</option>
+                <option value="FRONTIER">FRONTIER</option>
+                <option value="FRONTIER 4X4">FRONTIER 4X4</option>
+                <option value="FRONTIER V6">FRONTIER V6</option>
+                <option value="FRONTIER V6 4X4">FRONTIER V6 4X4</option>
+                <option value="MAXIMA">MAXIMA</option>
+                <option value="PATHFINDER 4X4">PATHFINDER 4X4</option>
+                <option value="QUEST">QUEST</option>
+                <option value="XTERRA">XTERRA</option>
+                <option value="XTERRA V6">XTERRA V6</option>
+                <option value="XTERRA V6 4X4">XTERRA V6 4X4</option>
+                <option value="ALERO">ALERO</option>
+                <option value="INTRIGUE">INTRIGUE</option>
+                <option value="SILHOUETTE">SILHOUETTE</option>
+                <option value="PROWLER">PROWLER</option>
+                <option value="BONNEVILLE">BONNEVILLE</option>
+                <option value="BONNEVILLE #">BONNEVILLE #</option>
+                <option value="FIREBIRD/FORMULA">FIREBIRD/FORMULA</option>
+                <option value="FIREFLY">FIREFLY</option>
+                <option value="GRAND AM">GRAND AM</option>
+                <option value="GRAND PRIX">GRAND PRIX</option>
+                <option value="GRAND PRIX #">GRAND PRIX #</option>
+                <option value="MONTANA">MONTANA</option>
+                <option value="SUNFIRE">SUNFIRE</option>
+                <option value="911 CARRERA">911 CARRERA</option>
+                <option value="911 CARRERA 4">911 CARRERA 4</option>
+                <option value="BOXSTER">BOXSTER</option>
+                <option value="BOXSTER S">BOXSTER S</option>
+                <option value="9-3 TURBO">9-3 TURBO</option>
+                <option value="9-5 TURBO">9-5 TURBO</option>
+                <option value="9-5 WAGON TURBO">9-5 WAGON TURBO</option>
+                <option value="LW WAGON">LW WAGON</option>
+                <option value="SC">SC</option>
+                <option value="SC #">SC #</option>
+                <option value="SL">SL</option>
+                <option value="SL #">SL #</option>
+                <option value="SW WAGON #">SW WAGON #</option>
+                <option value="FORESTER AWD">FORESTER AWD</option>
+                <option value="IMPREZA AWD">IMPREZA AWD</option>
+                <option value="IMPREZA WAGON AWD">IMPREZA WAGON AWD</option>
+                <option value="LEGACY AWD">LEGACY AWD</option>
+                <option value="LEGACY WAGON AWD">LEGACY WAGON AWD</option>
+                <option value="ESTEEM">ESTEEM</option>
+                <option value="ESTEEM WAGON">ESTEEM WAGON</option>
+                <option value="GRAND VITARA 4X4">GRAND VITARA 4X4</option>
+                <option value="SWIFT">SWIFT</option>
+                <option value="VITARA 4X4">VITARA 4X4</option>
+                <option value="VITARA CONVERTIBLE 4X4">VITARA CONVERTIBLE 4X4</option>
+                <option value="4RUNNER 4X4">4RUNNER 4X4</option>
+                <option value="AVALON">AVALON</option>
+                <option value="CAMRY">CAMRY</option>
+                <option value="CAMRY SOLARA">CAMRY SOLARA</option>
+                <option value="CAMRY SOLARA CONVERTIBLE">CAMRY SOLARA CONVERTIBLE</option>
+                <option value="CELICA">CELICA</option>
+                <option value="COROLLA">COROLLA</option>
+                <option value="ECHO">ECHO</option>
+                <option value="RAV4">RAV4</option>
+                <option value="RAV4 4X4">RAV4 4X4</option>
+                <option value="RAV4 SOFT TOP">RAV4 SOFT TOP</option>
+                <option value="RAV4 SOFT TOP 4X4">RAV4 SOFT TOP 4X4</option>
+                <option value="SIENNA">SIENNA</option>
+                <option value="TACOMA">TACOMA</option>
+                <option value="TACOMA 4X4">TACOMA 4X4</option>
+                <option value="TUNDRA">TUNDRA</option>
+                <option value="TUNDRA 4X4">TUNDRA 4X4</option>
+                <option value="CABRIO">CABRIO</option>
+                <option value="EUROVAN">EUROVAN</option>
+                <option value="EUROVAN CAMPER">EUROVAN CAMPER</option>
+                <option value="GOLF">GOLF</option>
+                <option value="GOLF TDI DIESEL">GOLF TDI DIESEL</option>
+                <option value="GTI">GTI</option>
+                <option value="JETTA">JETTA</option>
+                <option value="JETTA TDI DIESEL">JETTA TDI DIESEL</option>
+                <option value="NEW BEETLE">NEW BEETLE</option>
+                <option value="NEW BEETLE TDI DIESEL">NEW BEETLE TDI DIESEL</option>
+                <option value="PASSAT">PASSAT</option>
+                <option value="PASSAT WAGON">PASSAT WAGON</option>
+                <option value="C70 CONVERTIBLE TURBO">C70 CONVERTIBLE TURBO</option>
+                <option value="C70 TURBO">C70 TURBO</option>
+                <option value="S70">S70</option>
+                <option value="S70 AWD TURBO">S70 AWD TURBO</option>
+                <option value="S70 GLT TURBO">S70 GLT TURBO</option>
+                <option value="S70 T5 TURBO">S70 T5 TURBO</option>
+                <option value="S80 2.9">S80 2.9</option>
+                <option value="S80 T-6">S80 T-6</option>
+                <option value="V70">V70</option>
+                <option value="V70 AWD TURBO">V70 AWD TURBO</option>
+                <option value="V70 GLT TURBO">V70 GLT TURBO</option>
+                <option value="V70 T5 TURBO">V70 T5 TURBO</option>
+                <option value="V70R AWD TURBO">V70R AWD TURBO</option>
+            </select>
+
+            <label for="vehicle_class">VEHICLE CLASS</label>
+            <select name="vehicle_class" id="vehicle_class">
+                <option value="COMPACT">COMPACT</option>
+                <option value="MID-SIZE">MID-SIZE</option>
+                <option value="SUBCOMPACT">SUBCOMPACT</option>
+                <option value="STATION WAGON - MID-SIZE">STATION WAGON - MID-SIZE</option>
+                <option value="MINICOMPACT">MINICOMPACT</option>
+                <option value="TWO-SEATER">TWO-SEATER</option>
+                <option value="STATION WAGON - SMALL">STATION WAGON - SMALL</option>
+                <option value="FULL-SIZE">FULL-SIZE</option>
+                <option value="SUV">SUV</option>
+                <option value="VAN - CARGO">VAN - CARGO</option>
+                <option value="VAN - PASSENGER">VAN - PASSENGER</option>
+                <option value="PICKUP TRUCK - STANDARD">PICKUP TRUCK - STANDARD</option>
+                <option value="PICKUP TRUCK - SMALL">PICKUP TRUCK - SMALL</option>
+                <option value="MINIVAN">MINIVAN</option>
+            </select>
+
+            <label for="engine_size">ENGINE SIZE</label>
+            <input type="number" name="engine_size" id="engine_size" step="0.1" min="0" placeholder="e.g. 2.0" value="2.0">
+
+            <label for="cylinders">CYLINDERS</label>
+            <select name="cylinders" id="cylinders">
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+                <option value="10">10</option>
+                <option value="12">12</option>
+            </select>
+
+            <label for="transmission">TRANSMISSION</label>
+            <select name="transmission" id="transmission">
+                <option value="A4">A4</option>
+                <option value="M5">M5</option>
+                <option value="AS5">AS5</option>
+                <option value="AS4">AS4</option>
+                <option value="M6">M6</option>
+                <option value="A5">A5</option>
+                <option value="A3">A3</option>
+                <option value="AS6">AS6</option>
+            </select>
+
+            <label for="fuel">FUEL</label>
+            <select name="fuel" id="fuel">
+                <option value="X">X</option>
+                <option value="Z">Z</option>
+                <option value="E">E</option>
+                <option value="N">N</option>
+                <option value="D">D</option>
+            </select>
+
+            <label for="fuel_consumption">FUEL CONSUMPTION (L/100km or MPG equivalent)</label>
+            <input type="number" step="0.1" name="fuel_consumption" id="fuel_consumption" placeholder="e.g. 13.7">
+
+            <button type="submit"> Predict </button>
+
+        </form>
+
+        {% if result %}
+            <h2 style="text-align: center; margin-top: 20px; color: #28a745;">
+                Prediction: {{ result }}
+            </h2>
+        {% endif %}
+
+    </main>
+</body>
+</html>
